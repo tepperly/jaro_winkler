@@ -11,6 +11,10 @@ Benchmark.bmbm do |x|
     n.times{ ary.each{ |str1, str2| JaroWinkler.c_distance(str1, str2) } }
   end
 
+  x.report 'jaro_winkler adj_table' do
+    n.times{ ary.each{ |str1, str2| JaroWinkler.c_distance(str1, str2, :adj_table => true) } }
+  end
+
   x.report 'fuzzystringmatch' do
     jarow = FuzzyStringMatch::JaroWinkler.create(:native)
     n.times{ ary.each{ |str1, str2| jarow.getDistance(str1, str2) } }
